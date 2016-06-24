@@ -1,0 +1,1 @@
+const SERVICE_URL = 'http://104.236.110.237:3000';

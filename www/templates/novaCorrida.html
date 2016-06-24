@@ -1,0 +1,26 @@
+<ion-view style="" class=" " id="page3" title="Nova corrida">
+    <ion-content class="has-header" padding="true" ng-controller="novaCorridaCtrl">
+      <div class="card">
+        <div class="image item-image">
+          <img ng-src="{{imageCamera}}" ng-model="imagem" />
+        </div>
+      </div>
+        <button class=" button button-positive  button-block " id="novaCorrida-button5" ng-click="pegarFoto()">Tirar foto</button>
+        <form style="" class="list">
+          Km:
+          <label style="" class="item item-input">
+              <input ng-model="mileage" placeholder="Informar KM" type="number" />
+          </label>
+
+            <div style="width: 283px; height: 5px;" class="spacer"></div>
+
+                <span class="input-label"></span>
+                <label>
+                    <select class="item item-select" ng-model="car" ng-options="veiculo.Placa+' - '+veiculo.Modelo for veiculo in lista track by veiculo.IdVeiculo">
+                      <option value="">Placa - Modelo</option>
+                    </select>
+                </label>
+              </form>
+              <button ng-click="addCorrida()" class="button button-balanced  button-block" id="abrirCorrida-button4" ng-disabled="">Iniciar</button>
+    </ion-content>
+</ion-view>

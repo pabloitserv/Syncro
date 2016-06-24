@@ -1,0 +1,18 @@
+<ion-view style="" class=" " id="page2" title="Login">
+    <ion-content class="has-header" padding="true" ng-controller="loginCtrl">
+        <div class="">
+            <img style="display: block; margin-left: auto; margin-right: auto;" src="img/logo.png" height="auto" width="110">
+        </div>
+        <form class="list " id="login-form3">
+            <div style="width: 283px; height: 17px;" class="spacer"></div>
+            <label id="login-input5" class="item item-input ">
+                <input placeholder="Usuário" type="text" ng-model="usuario">
+            </label>
+            <div style="width: 283px; height: 17px;" class="spacer"></div>
+            <label id="login-input4" class="item item-input ">
+                <input placeholder="Senha" type="password" ng-model="senha">
+            </label>
+            <a class=" button button-positive  button-block " id="login-button3" ng-click="validarUsuario()">Log in</a>
+        </form>
+    </ion-content>
+</ion-view>
