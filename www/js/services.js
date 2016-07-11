@@ -11,8 +11,6 @@ angular.module('app.services', [])
   }
 })
 
-
-
 .factory('userServiceLogin', function($http) {
   var _getLogin = function(token){
       return $http.get(SERVICE_URL+"/session/user?token="+token);
@@ -22,7 +20,6 @@ angular.module('app.services', [])
     getLogin: _getLogin
   }
 })
-
 
 .factory('userServicePass', function($http) {
  return {
@@ -43,8 +40,6 @@ angular.module('app.services', [])
   }
 })
 
-
-
 .factory('veiculoService', function($http) {
  return {
     getVeiculos: function(){
@@ -57,7 +52,6 @@ angular.module('app.services', [])
         }
  }
 })
-
 
 .factory('verificaCorridaService', function($http) {
  return {
@@ -73,8 +67,6 @@ angular.module('app.services', [])
  }
 })
 
-
-
 .factory('criarCorridaService', function($http) {
       var _postCorrida = function(run){
           return  $http.post(SERVICE_URL+"/run", run);
@@ -83,9 +75,6 @@ angular.module('app.services', [])
         postCorrida: _postCorrida
       }
 })
-
-
-
 
 .factory('Scopes', function ($rootScope) {
     var mem = {};
@@ -100,8 +89,26 @@ angular.module('app.services', [])
     };
 })
 
+.factory('buscarCorrida', function($http) {
+ return {
+    getCorridas: function(inicio, termino, idCar, idUser,flag){
+      //console.log(inicio,termino,idCar);
+      //http://localhost:3000/run?$gte="2016-06-21"&$lte="2016-06-22"
+      if (flag==1) {
+        var _url= 'http://104.236.110.237:3000/run?$gte="'+inicio+'"&$lte="'+termino+'"&carro='+idCar+'"&flag='+flag+'';
 
+      }else {
+        var _url= 'http://104.236.110.237:3000/run?$gte="'+inicio+'"&$lte="'+termino+'&flag='+flag+'&usuario='+idUser+'';
+      }
 
+       return $http.get(_url).then(function(response){
+          return response;
+       }, function(error){
+
+    })
+  }
+ }
+})
 .service('BlankService', [function(){
 
 }]);

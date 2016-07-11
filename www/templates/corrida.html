@@ -1,12 +1,12 @@
 <ion-view style="" class=" " id="page2" title="Corrida">
-    <ion-content class="has-header" padding="true" ng-controller="corridaCtrl">
-        <div class="item item-divider">Usuario: <b>{{instalador}}</b></div>
-        <a class=" button button-balanced  button-block " id="corrida-button11" ng-click="novaCorrida(); abrir=!abrir" ng-disabled="abrir" name="abrir">Nova corrida</a>
-        <div class="card" ng-show="abre">
-          <div class="item item-text-wrap text-color">
-            Corrida iniciada!
-          </div>
+  <ion-content class="has-header" padding="true" ng-controller="corridaCtrl">
+      <div class="item item-divider">Usuario: <b>{{instalador}}</b></div>
+      <a class=" button button-balanced  button-block " id="corrida-button11" ng-click="novaCorrida()" ng-disabled="abre" name="abrir">Nova corrida</a>
+      <div class="card" ng-show="abre">
+        <div class="item item-text-wrap text-color">
+           {{message}}
         </div>
-        <a class=" button button-assertive  button-block " id="corrida-button4" ng-disabled="!abrir" ng-click="fecharCorrida(); abrir=!abrir" name="fechar">Fechar corrida</a>
-    </ion-content>
+      </div>
+      <a class=" button button-assertive  button-block " id="corrida-button4" ng-click="fecharCorrida()" ng-disabled="fecha"  name="fechar">Fechar corrida</a>
+</ion-content>
 </ion-view>

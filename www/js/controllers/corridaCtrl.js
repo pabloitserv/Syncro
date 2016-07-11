@@ -1,25 +1,43 @@
 angular.module('app')
 
 
-.controller('corridaCtrl', function($scope, Scopes,verificaCorridaService,$location) {
+.controller('corridaCtrl', function($scope, Scopes, verificaCorridaService, $location, buscarCorrida,$filter) {
 
   var token = Scopes.get('loginCtrl').token;
-
+  var usuario = Scopes.get('loginCtrl').user;
   $scope.instalador = Scopes.get('loginCtrl').nome;
+  $scope.abre = false;
 
- $scope.abre = false;
 
- $scope.novaCorrida = function(){
+  var inicio = new Date();
+  var dia =1;
+  var dataAtual = new Date();
+  var termino = new Date(dataAtual.setDate(dataAtual.getDate()+1));
 
-   $location.path('/page3');
-   $scope.abre = function(){
-    $scope.abre = true;
-   }
- };
- $scope.fecharCorrida = function(){
-   $location.path('/page4');
-   $scope.abre = false;
- };
+  inicio = $filter('date')(inicio, 'yyyy-MM-dd');
+  termino = $filter('date')(termino, 'yyyy-MM-dd');
 
+  buscarCorrida.getCorridas(inicio,termino,0,usuario._id,0).then(function(corridas){
+
+     var posicao = corridas.data.length-1;
+
+     if (corridas.data[posicao].open==false) {
+        $scope.abre = false;
+        $scope.fecha = true;
+        $scope.message = "Corrida fechada!";
+     }
+     else{
+       $scope.abre = true;
+       $scope.fecha = false;
+       $scope.message = "Corrida iniciada!";
+     }
+  });
+  $scope.novaCorrida = function(){
+    $location.path('/page3');
+
+  };
+  $scope.fecharCorrida = function(){
+    $location.path('/page4');
+  };
 
 })

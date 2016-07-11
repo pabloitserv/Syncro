@@ -1,6 +1,6 @@
 angular.module('app')
 
-.controller('loginCtrl', function($scope, $location, userServiceToken, userServiceLogin, Scopes) {
+.controller('loginCtrl', function($scope, $location, userServiceToken, userServiceLogin, Scopes, buscarCorrida) {
 
     $scope.validarUsuario = function(){
 
@@ -28,7 +28,7 @@ angular.module('app')
                     alert("MSG003 - ESTE USUÁRIO NÃO TEM SENHA DEFINIDA!");
                       $location.path('/page5');
                   }else{
-                      console.log('entrou na corrida');
+
                       $location.path('/page2');
 
                     }
@@ -43,6 +43,15 @@ angular.module('app')
               }).error(function(chave,status){
                 $scope.message = "Falha na validação do Login" + user;
               });
+
+
+
+              
+
+
+
+
+
   };
 
 })

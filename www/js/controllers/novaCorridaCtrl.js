@@ -18,8 +18,8 @@ angular.module('app')
     sourceType: Camera.PictureSourceType.CAMERA,
     allowEdit: false,
     encodingType: Camera.EncodingType.JPEG,
-    targetWidth: 100,
-    targetHeight: 100,
+    targetWidth: 300,
+    targetHeight: 300,
     popoverOptions: CameraPopoverOptions,
     saveToPhotoAlbum: false
   };
@@ -35,7 +35,7 @@ angular.module('app')
 
   };
 
-  var posOptions = {timeout: 10000, enableHighAccuracy: false};
+  /*var posOptions = {timeout: 10000, enableHighAccuracy: false};
    $cordovaGeolocation
    .getCurrentPosition(posOptions)
    .then(function (position) {
@@ -43,8 +43,7 @@ angular.module('app')
       $scope.longitude = position.coords.longitude
       }, function(err) {
       console.log(err)
-   });
-
+   });*/
 
     $scope.addCorrida = function(){
         var deviceStartDate = new Date();
@@ -61,12 +60,12 @@ angular.module('app')
         }
 
 
-
         criarCorridaService.postCorrida(run).success(function(data){
-          $location.path('/page2');
+          $location.path('/page1');
         }).error(function(data,status){
            $scope.message = "Falha ao Registrar Corrida"+data;
         });
+        console.log(run);
   };
 
-})
+});
