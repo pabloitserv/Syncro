@@ -35,7 +35,7 @@ angular.module('app')
 
   };
 
-  /*var posOptions = {timeout: 10000, enableHighAccuracy: false};
+  var posOptions = {timeout: 10000, enableHighAccuracy: false};
    $cordovaGeolocation
    .getCurrentPosition(posOptions)
    .then(function (position) {
@@ -43,7 +43,7 @@ angular.module('app')
       $scope.longitude = position.coords.longitude
       }, function(err) {
       console.log(err)
-   });*/
+   });
 
     $scope.addCorrida = function(){
         var deviceStartDate = new Date();

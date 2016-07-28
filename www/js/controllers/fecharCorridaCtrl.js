@@ -36,7 +36,7 @@ angular.module('app')
 
   };
 
-/* var posOptions = {timeout: 10000, enableHighAccuracy: false};
+   var posOptions = {timeout: 10000, enableHighAccuracy: false};
    $cordovaGeolocation
    .getCurrentPosition(posOptions)
    .then(function (position) {
@@ -45,7 +45,7 @@ angular.module('app')
      }, function(err) {
       console.log(err)
    });
-*/
+
 
     $scope.finalizaCorrida = function(){
         var deviceStartDate = new Date();
