@@ -1,12 +1,27 @@
 <ion-view style="" class=" " id="page2" title="Corrida">
   <ion-content class="has-header" padding="true" ng-controller="corridaCtrl">
-      <div class="item item-divider">Usuario: <b>{{instalador}}</b></div>
-      <a class=" button button-balanced  button-block " id="corrida-button11" ng-click="novaCorrida()" ng-disabled="abre" name="abrir">Nova corrida</a>
-      <div class="card" ng-show="abre">
-        <div class="item item-text-wrap text-color">
-           {{message}}
-        </div>
+      <div class="item item-divider">Usuario: <b>{{instalador}}</b>
       </div>
-      <a class=" button button-assertive  button-block " id="corrida-button4" ng-click="fecharCorrida()" ng-disabled="fecha"  name="fechar">Fechar corrida</a>
+
+
+        <a class="button button-balanced  button-block " id="corrida-button11" ng-disabled="on" ng-show="onExibi" ng-click="novaCorrida()">Nova corrida</a>
+
+
+        <a class=" button button-assertive  button-block " id="corrida-button4" ng-disabled="off" ng-show="offExibi"  ng-click="fecharCorrida()">Fechar corrida</a>
+
+        <div class="card" ng-show="offExibi">
+          <div class="item item-text-wrap text-color text_center">
+            <strong>{{message1}}</strong>
+          </div>
+        </div>
+
+          <div style="height: 10px;" class="spacer"></div>
+
+          <div class="card" ng-show="offExibi">
+            <div class="item item-text-wrap text-color-2 text_center">
+              <strong>{{message2}}</strong>
+            </div>
+          </div>
+
 </ion-content>
 </ion-view>

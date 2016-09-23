@@ -100,7 +100,7 @@ angular.module('app.services', [])
       }else {
         var _url= 'http://104.236.110.237:3000/run?$gte="'+inicio+'"&$lte="'+termino+'&flag='+flag+'&usuario='+idUser+'';
       }
-      
+
 
        return $http.get(_url).then(function(response){
           return response;

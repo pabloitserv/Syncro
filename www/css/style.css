@@ -8,5 +8,24 @@
 .text-color{
   color: #00d63c;
   background-color: rgba(109, 233, 89, 0.2);
-  border: 1px solid rgb(20, 255, 0);
+  text-align: center;
+  }
+.text-color-2{
+  color: rgb(254, 0, 0);
+  background-color: rgba(255, 0, 0, 0.2);
+  text-align: center;
+}
+.text_align_and_color{
+  margin-top: 10px;
+  margin-right: auto;
+  margin-left: auto;
+  text-align: center;
+  color: rgb(255, 0, 0);
+}
+.text_align_and_color_alert{
+  margin-top: 10px;
+  margin-right: auto;
+  margin-left: auto;
+  text-align: center;
+  color: rgb(12, 0, 250);
 }

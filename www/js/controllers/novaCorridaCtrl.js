@@ -1,7 +1,7 @@
 angular.module('app')
 
 
-.controller('novaCorridaCtrl', function($scope, $http, $cordovaCamera, $cordovaGeolocation, $interval, dateFilter, veiculoService, Scopes, criarCorridaService, $location) {
+.controller('novaCorridaCtrl', function($scope, $http, $cordovaCamera, $cordovaGeolocation, $interval, dateFilter, veiculoService, Scopes, criarCorridaService, $location, $window) {
 
 
   veiculoService.getVeiculos().then(function(carros){
@@ -36,36 +36,42 @@ angular.module('app')
   };
 
   var posOptions = {timeout: 10000, enableHighAccuracy: false};
-   $cordovaGeolocation
-   .getCurrentPosition(posOptions)
-   .then(function (position) {
-      $scope.latitude  = position.coords.latitude
-      $scope.longitude = position.coords.longitude
-      }, function(err) {
-      console.log(err)
-   });
+  $cordovaGeolocation
+ .getCurrentPosition(posOptions)
+ .then(function (position) {
+  $scope.latitude  = position.coords.latitude;
+  $scope.longitude = position.coords.longitude;
+   }, function(err) {
+    console.log(err)
+ });
+
 
     $scope.addCorrida = function(){
-        var deviceStartDate = new Date();
-        var user = Scopes.get('loginCtrl').user;
-        var run = {
-          deviceStartDate: deviceStartDate,
-          mileage: $scope.mileage,
-          car: $scope.car.IdVeiculo,
-          user: user,
-          open:true,
-          photo: $scope.imageCamera,
-          latitude: $scope.latitude,
-          longitude:$scope.longitude
-        }
+      var deviceStartDate = new Date();
 
+      var user = Scopes.get('loginCtrl').user;
+      var run = {
+        deviceStartDate: deviceStartDate,
+        mileage: $scope.mileage,
+        car: $scope.car.IdVeiculo,
+        user: user,
+        open:true,
+        photo: $scope.imageCamera,
+        latitude: $scope.latitude,
+        longitude:$scope.longitude
+      }
 
         criarCorridaService.postCorrida(run).success(function(data){
+          alert("Corrida cadastrada com sucesso!");
+
           $location.path('/page1');
+           window.location.reload(true);
         }).error(function(data,status){
            $scope.message = "Falha ao Registrar Corrida"+data;
+           alert("Falha ao cadastrar");
         });
-        console.log(run);
+
+
   };
 
 });

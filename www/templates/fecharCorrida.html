@@ -12,14 +12,12 @@
                 <input ng-model="mileage" placeholder="Informar KM" type="number" />
             </label>
 
-            <div style="width: 283px; height: 5px;" class="spacer"></div>
+            <div style="width: 283px; height: 30px;" class="spacer"></div>
 
-                <span class="input-label"></span>
-                <label>
-                    <select class="item item-select" ng-model="car" ng-options="veiculo.Placa+' - '+veiculo.Modelo for veiculo in lista track by veiculo.IdVeiculo">
-                      <option value="">Placa - Modelo</option>
-                    </select>
-                </label>
+              <p>
+                <b class="text_align_and_color_alert">{{"&nbsp;CARRO:&nbsp;&nbsp;&nbsp;&nbsp;"+ carroGravado.Placa + " - " + carroGravado.Modelo}}</b>
+              </p>
+
               </form>
               <button ng-click="finalizaCorrida()" class="button button-assertive  button-block" id="abrirCorrida-button4">Fechar</button>
     </ion-content>

@@ -2,9 +2,9 @@ angular.module('app')
 
 .controller('loginCtrl', function($scope, $location, userServiceToken, userServiceLogin, Scopes, buscarCorrida) {
 
-    $scope.validarUsuario = function(){
 
-        var parametros = {
+    $scope.validarUsuario = function(){
+     var parametros = {
           cpf: $scope.usuario,
           password: $scope.senha
         };
@@ -19,7 +19,6 @@ angular.module('app')
               $scope.usuario = user.value.usuario;
 
               Scopes.store('loginCtrl',$scope);
-
 
               if (user.value != null) {
 
@@ -44,14 +43,7 @@ angular.module('app')
                 $scope.message = "Falha na validação do Login" + user;
               });
 
-
-
-              
-
-
-
-
-
   };
+
 
 })
