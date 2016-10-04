@@ -1,24 +1,32 @@
+<!--
+  Tela de fechamento de corrida, recupera a imagem do painel, o valor do km e qual o carro esta sendo usado
+ -->
+
 <ion-view style="" class=" " id="page4" title="Fechar corrida">
     <ion-content class="has-header" padding="true" ng-controller="fecharCorridaCtrl">
       <div class="card">
         <div class="image item-image">
+                    <!--Retorna a imagem recureda pela camêra -->
           <img ng-src="{{imageCamera}}" ng-model="imagem" />
         </div>
       </div>
+            <!-- Botão para se abrir a camêra -->
         <button class=" button button-positive  button-block " id="novaCorrida-button5" ng-click="pegarFoto()">Tirar foto</button>
         <form style="" class="list">
             Km:
             <label style="" class="item item-input">
+                          <!-- Recupera o valor do km inputado -->
                 <input ng-model="mileage" placeholder="Informar KM" type="number" />
             </label>
 
             <div style="width: 283px; height: 30px;" class="spacer"></div>
-
+            <!-- Retorna o carro escolhido na tela de abertura  -->
               <p>
                 <b class="text_align_and_color_alert">{{"&nbsp;CARRO:&nbsp;&nbsp;&nbsp;&nbsp;"+ carroGravado.Placa + " - " + carroGravado.Modelo}}</b>
               </p>
 
               </form>
+                <!-- Cadastra, finaliza e adiciona a corrida -->
               <button ng-click="finalizaCorrida()" class="button button-assertive  button-block" id="abrirCorrida-button4">Fechar</button>
     </ion-content>
 </ion-view>

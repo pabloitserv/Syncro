@@ -1,5 +1,6 @@
 angular.module('app')
 
+// Controla o status da corrida
 
 .controller('corridaCtrl', function($scope, Scopes, verificaCorridaService, $location, buscarCorrida, $filter) {
 

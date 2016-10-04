@@ -1,14 +1,21 @@
+<!--
+  Tela de abertura de corrida, recupera a imagem do painel, o valor do km e qual o carro esta sendo usado
+ -->
+
 <ion-view style="" class=" " id="page3" title="Nova corrida">
     <ion-content class="has-header" padding="true" ng-controller="novaCorridaCtrl">
       <div class="card">
         <div class="image item-image">
+          <!--Retorna a imagem recureda pela camêra -->
           <img ng-src="{{imageCamera}}" ng-model="imagem" />
         </div>
       </div>
+      <!-- Botão para se abrir a camêra -->
         <button class=" button button-positive  button-block " id="novaCorrida-button5" ng-click="pegarFoto()">Tirar foto</button>
         <form style="" class="list">
           Km:
           <label style="" class="item item-input">
+            <!-- Recupera o valor do km inputado -->
               <input ng-model="mileage" placeholder="Informar KM" type="number" />
           </label>
 
@@ -16,11 +23,13 @@
 
                 <span class="input-label"></span>
                 <label>
+                  <!-- Uma combo box com todos os modelos de carros com placas e modelos -->
                     <select class="item item-select" ng-model="car" ng-options="veiculo.Placa+' - '+veiculo.Modelo for veiculo in lista track by veiculo.IdVeiculo">
                       <option value="">Placa - Modelo</option>
                     </select>
                 </label>
               </form>
+              <!-- Cadastra, inicia e adiciona a corrida no banco -->
               <button ng-click="addCorrida()" class="button button-balanced  button-block" id="abrirCorrida-button4" ng-disabled="">Iniciar</button>
     </ion-content>
 </ion-view>

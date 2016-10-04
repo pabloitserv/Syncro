@@ -1,7 +1,7 @@
 angular.module('app')
 
 .controller('criarSenhaCtrl', function($scope, userServicePass,userServiceLogin,Scopes,$location){
-
+//Controla a criação de senha
   $scope.criar = function(){
     var usuario = Scopes.get('loginCtrl').user;
 

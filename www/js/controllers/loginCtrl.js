@@ -2,6 +2,7 @@ angular.module('app')
 
 .controller('loginCtrl', function($scope, $location, userServiceToken, userServiceLogin, Scopes, buscarCorrida) {
 
+//Adiciona um token ao usuário
 
     $scope.validarUsuario = function(){
      var parametros = {

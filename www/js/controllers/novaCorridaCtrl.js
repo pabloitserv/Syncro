@@ -1,5 +1,7 @@
 angular.module('app')
 
+//Faz o controle da captura de imagem e cadastra a corrida no banco
+
 
 .controller('novaCorridaCtrl', function($scope, $http, $cordovaCamera, $cordovaGeolocation, $interval, dateFilter, veiculoService, Scopes, criarCorridaService, $location, $window) {
 

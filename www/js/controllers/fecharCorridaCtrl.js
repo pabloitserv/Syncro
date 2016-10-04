@@ -1,5 +1,6 @@
 angular.module('app')
 
+// Controla o fechamento da corrida, pega a imagem e o input e cadastra no banco
 
 .controller('fecharCorridaCtrl', function($scope, $http, $window, $cordovaCamera, $cordovaGeolocation, $interval, dateFilter, veiculoService, Scopes, criarCorridaService, $location, $filter, buscarCorrida) {
 
@@ -88,7 +89,7 @@ angular.module('app')
 
           criarCorridaService.postCorrida(run).success(function(data){
             alert("Corrida finaliza com sucesso!");
-            
+
             $location.path('/page1')
             $window.location.reload(true);
           }).error(function(data,status){

@@ -1,3 +1,7 @@
+  <!--
+  Tela de criação de senha
+ -->
+
 <ion-view style="" id="page5" title="Login - Nova Senha">
     <ion-content class="has-header" padding="true" ng-controller="criarSenhaCtrl">
       <div class="logo">
@@ -12,12 +16,13 @@
                   <p class="alerta">Por favor insira uma nova senha!</p>
                 </div>
                 <label style="" class="item item-input">
+                    <!-- Recebe a senha nova atraves do input -->
                     <input placeholder="Nova Senha" type="text" ng-model="novaSenha" />
                 </label>
                 <div style="height: 5px;" class="spacer"></div>
 
             </ion-list>
-
+              <!-- cadastra uma nova senha  -->
             <a ng-click="criar()" class="button button-positive  button-block" ng-disabled="!novaSenha">Criar Senha</a>
         </form>
     </ion-content>
