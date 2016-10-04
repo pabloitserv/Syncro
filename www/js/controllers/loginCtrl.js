@@ -25,7 +25,7 @@ angular.module('app')
 
                   if (user.value.password == "" || user.value.password == null) {
 
-                    alert("MSG003 - ESTE USUÁRIO NÃO TEM SENHA DEFINIDA!");
+                    alert("MSG002 - ESTE USUÁRIO NÃO TEM SENHA DEFINIDA!");
                       $location.path('/page5');
                   }else{
 
@@ -33,7 +33,7 @@ angular.module('app')
 
                     }
               }else{
-                alert("MSG002 - LOGIN INEXISTENTE!");
+                alert("MSG001 - LOGIN INEXISTENTE!");
               }
 
               }).error(function(user,status){
