@@ -6,6 +6,10 @@ angular.module('app')
 .controller('novaCorridaCtrl', function($scope, $http, $cordovaCamera, $cordovaGeolocation, $interval, dateFilter, veiculoService, Scopes, criarCorridaService, $location, $window) {
 
 
+  $scope.load = false;
+  $scope.iniciar = "Iniciar";
+
+
   veiculoService.getVeiculos().then(function(carros){
     if (carros.data != null) {
       $scope.lista = carros.data;
@@ -49,6 +53,9 @@ angular.module('app')
 
 
     $scope.addCorrida = function(){
+      $scope.load = true;
+      $scope.iniciar = "";
+
       var deviceStartDate = new Date();
 
       var user = Scopes.get('loginCtrl').user;
@@ -65,9 +72,12 @@ angular.module('app')
 
         criarCorridaService.postCorrida(run).success(function(data){
           alert("Corrida cadastrada com sucesso!");
+          $scope.load = true;
+          $scope.iniciar = "Iniciada";
 
           $location.path('/page1');
            window.location.reload(true);
+           
         }).error(function(data,status){
            $scope.message = "Falha ao Registrar Corrida"+data;
            alert("Falha ao cadastrar");

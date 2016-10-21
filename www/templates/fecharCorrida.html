@@ -16,7 +16,7 @@
             Km:
             <label style="" class="item item-input">
                           <!-- Recupera o valor do km inputado -->
-                <input ng-model="mileage" placeholder="Informar KM" type="number" />
+                <input  placeholder="Informar KM" type="number" ng-model="mileage"/>
             </label>
 
             <div style="width: 283px; height: 30px;" class="spacer"></div>
@@ -27,6 +27,6 @@
 
               </form>
                 <!-- Cadastra, finaliza e adiciona a corrida -->
-              <button ng-click="finalizaCorrida()" class="button button-assertive  button-block" id="abrirCorrida-button4">Fechar</button>
+              <button ng-click="finalizaCorrida()" class="button button-assertive button-block " id="abrirCorrida-button4" ng-disabled="load"><ion-spinner icon="lines" ng-show="load"></ion-spinner><span ng-hide="load">{{ fechar }}</span></button>
     </ion-content>
 </ion-view>

@@ -4,6 +4,8 @@ angular.module('app')
 
 .controller('fecharCorridaCtrl', function($scope, $http, $window, $cordovaCamera, $cordovaGeolocation, $interval, dateFilter, veiculoService, Scopes, criarCorridaService, $location, $filter, buscarCorrida) {
 
+  $scope.load = false;
+  $scope.fechar = "Fechar";
 
   var dataAtraso = new Date();
   var inicio = new Date(dataAtraso.setDate(dataAtraso.getDate()-1));
@@ -73,13 +75,16 @@ angular.module('app')
 
 
       $scope.finalizaCorrida = function(){
+        $scope.load = true;
+        $scope.fechar = "";
+
           var deviceStartDate = new Date();
 
           var user = Scopes.get('loginCtrl').user;
           var run = {
             deviceStartDate: deviceStartDate,
             mileage: $scope.mileage,
-            car: corridas.data[posicao - 1].car,
+            car: carro,
             user: user,
             open:false,
             photo: $scope.imageCamera,
@@ -89,6 +94,9 @@ angular.module('app')
 
           criarCorridaService.postCorrida(run).success(function(data){
             alert("Corrida finaliza com sucesso!");
+
+            $scope.load = false;
+            $scope.fechar = "Fechar";
 
             $location.path('/page1')
             $window.location.reload(true);

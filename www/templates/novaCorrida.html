@@ -16,7 +16,7 @@
           Km:
           <label style="" class="item item-input">
             <!-- Recupera o valor do km inputado -->
-              <input ng-model="mileage" placeholder="Informar KM" type="number" />
+              <input  placeholder="Informar KM" type="number" ng-model="mileage"/>
           </label>
 
             <div style="width: 283px; height: 5px;" class="spacer"></div>
@@ -30,6 +30,10 @@
                 </label>
               </form>
               <!-- Cadastra, inicia e adiciona a corrida no banco -->
-              <button ng-click="addCorrida()" class="button button-balanced  button-block" id="abrirCorrida-button4" ng-disabled="">Iniciar</button>
+              <button ng-click="addCorrida()" class="button button-balanced button-block " id="abrirCorrida-button4" ng-disabled="load"><ion-spinner icon="lines" ng-show="load"></ion-spinner><span ng-hide="load">{{ iniciar }}</span></button>
+
+
+
+
     </ion-content>
 </ion-view>
