@@ -18,96 +18,88 @@ angular.module('app')
   buscarCorrida.getCorridas(inicio,termino,0,usuario._id,0).then(function(corridas){
 
     var posicao = corridas.data.length;
+    $scope.carro = corridas.data[posicao - 1].car;
 
-    console.log(posicao);
+  $scope.pegarFoto = function(){
 
-    var carro= corridas.data[posicao - 1].car;
-    console.log(carro);
+   var options = {
+    quality: 100,
+    destinationType: Camera.DestinationType.DATA_URL,
+    sourceType: Camera.PictureSourceType.CAMERA,
+    allowEdit: false,
+    encodingType: Camera.EncodingType.JPEG,
+    targetWidth: 300,
+    targetHeight: 300,
+    popoverOptions: CameraPopoverOptions,
+    saveToPhotoAlbum: false
+  };
 
-    veiculoService.getVeiculos().then(function(carros){
+  $cordovaCamera.getPicture(options).then(function(imageData) {
+    console.log("sucesso" + angular.toJson(imageData));
+    $scope.imageCamera = "data:image/jpeg;base64," + imageData;//Função trata a imagem, convertendo de binário para jpeg, renderizando na tela
+  }, function(err) {
+    // error
+    alert('err: '+err);
+    console.log("fracasso" + angular.toJson(imageData));
+    error(err);
+  });
 
-      for (var i = 0; i < carros.data.length; i++) {
-          if (carros.data[i].IdVeiculo == carro) {
-            $scope.carroGravado = carros.data[i];
-          }
-      //if (carros.data != null) {
-      //  $scope.lista = carros.data;
-      //}
+  };
+
+  var posOptions = {timeout: 10000, enableHighAccuracy: false};
+  $cordovaGeolocation
+ .getCurrentPosition(posOptions)
+ .then(function (position) {
+  $scope.latitude  = position.coords.latitude;
+  $scope.longitude = position.coords.longitude;
+   }, function(err) {
+    console.log(err)
+ });
+
+// Acha a placa e registra
+ var i;
+ for (i = 0; i < corridas.data.length; i++) {
+
+         $scope.placaModel = corridas.data[i].vehicle;
+
+   }
+
+    $scope.finalizaCorrida = function(){
+      $scope.load = true;
+      $scope.fechar = "";
+
+      var deviceStartDate = new Date();
+
+      var user = Scopes.get('loginCtrl').user;
+      var run = {
+        deviceStartDate: deviceStartDate,
+        mileage: $scope.mileage,
+        car: $scope.carro,
+        vehicle: $scope.placaModel,
+        user: user,
+        city: user.city,
+        open:false,
+        photo: $scope.imageCamera,
+        latitude: $scope.latitude,
+        longitude:$scope.longitude
       }
-  });
+      console.log(run);
 
-    $scope.pegarFoto = function(){
+        criarCorridaService.postCorrida(run).success(function(data){
+          alert("Corrida cadastrada com sucesso!");
+          $scope.load = false;
+          $scope.fechar = "Finalizada";
 
-     var options = {
-      quality: 100,
-      destinationType: Camera.DestinationType.DATA_URL,
-      sourceType: Camera.PictureSourceType.CAMERA,
-      allowEdit: false,
-      encodingType: Camera.EncodingType.JPEG,
-      targetWidth: 300,
-      targetHeight: 300,
-      popoverOptions: CameraPopoverOptions,
-      saveToPhotoAlbum: false
+          $location.path('/page1');
+          $window.location.reload(true);
 
-    };
+        }).error(function(data,status){
+           alert("Falha ao cadastrar");
+           $scope.load = false;
+           $scope.fechar = "finalizar";
+        });
 
-    $cordovaCamera.getPicture(options).then(function(imageData) {
-      console.log("sucesso" + angular.toJson(imageData));
-      $scope.imageCamera = "data:image/jpeg;base64," + imageData;//Função trata a imagem, convertendo de binário para jpeg, renderizando na tela
-    }, function(err) {
-      // error
-      console.log("fracasso" + angular.toJson(imageData));
-      error(err);
-    });
-
-
-    };
-
-      var posOptions = {timeout: 10000, enableHighAccuracy: false};
-      $cordovaGeolocation
-     .getCurrentPosition(posOptions)
-     .then(function (position) {
-      $scope.latitude  = position.coords.latitude;
-      $scope.longitude = position.coords.longitude;
-       }, function(err) {
-        console.log(err)
-     });
-
-
-      $scope.finalizaCorrida = function(){
-        $scope.load = true;
-        $scope.fechar = "";
-
-          var deviceStartDate = new Date();
-
-          var user = Scopes.get('loginCtrl').user;
-          var run = {
-            deviceStartDate: deviceStartDate,
-            mileage: $scope.mileage,
-            car: carro,
-            user: user,
-            open:false,
-            photo: $scope.imageCamera,
-            latitude: $scope.latitude,
-            longitude:$scope.longitude
-          }
-
-          criarCorridaService.postCorrida(run).success(function(data){
-            alert("Corrida finaliza com sucesso!");
-
-            $scope.load = false;
-            $scope.fechar = "Fechar";
-
-            $location.path('/page1')
-            $window.location.reload(true);
-          }).error(function(data,status){
-             $scope.message = "Falha ao Registrar Corrida"+data;
-             alert("Falha ao cadastrar");
-          });
-          //console.log(run);
-
-    };
+      };
 
   });
-
-})
+});

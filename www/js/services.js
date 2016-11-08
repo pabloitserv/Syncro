@@ -95,10 +95,10 @@ angular.module('app.services', [])
       //console.log(inicio,termino,idCar);
       //http://localhost:3000/run?$gte="2016-06-21"&$lte="2016-06-22"
       if (flag==1) {
-        var _url= 'http://104.236.110.237:3000/run?$gte="'+inicio+'"&$lte="'+termino+'"&carro='+idCar+'"&flag='+flag+'';
+        var _url= 'http://localhost:3000/run?$gte="'+inicio+'"&$lte="'+termino+'"&carro='+idCar+'"&flag='+flag+'';
 
       }else {
-        var _url= 'http://104.236.110.237:3000/run?$gte="'+inicio+'"&$lte="'+termino+'&flag='+flag+'&usuario='+idUser+'';
+        var _url= 'http://localhost:3000/run?$gte="'+inicio+'"&$lte="'+termino+'&flag='+flag+'&usuario='+idUser+'';
       }
 
 

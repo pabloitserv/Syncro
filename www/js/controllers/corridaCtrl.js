@@ -8,6 +8,7 @@ angular.module('app')
   var usuario = Scopes.get('loginCtrl').user;
   $scope.instalador = Scopes.get('loginCtrl').nome;
 
+
   var dataAtraso = new Date();
   var inicio = new Date(dataAtraso.setDate(dataAtraso.getDate()-1));
   var dia =1;
