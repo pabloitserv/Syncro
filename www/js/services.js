@@ -3,7 +3,7 @@ angular.module('app.services', [])
 .factory('userServiceToken', function($http) {
 
   var _postToken = function(parametros){
-      return $http.post(SERVICE_URL+"/session",parametros);
+      return $http.post(SERVICE_URL+"/session", parametros);
   };
 
   return{
@@ -31,8 +31,7 @@ angular.module('app.services', [])
       };
       var _url=  SERVICE_URL+"/user";
       return $http.put(_url,parametros).then(function(response){
-              console.log("executou");
-            return response;
+                return response;
             }, function(error){
               console.log("erro!");
             });
@@ -40,7 +39,7 @@ angular.module('app.services', [])
   }
 })
 
-.factory('veiculoService', function($http) {
+/*factory('veiculoService', function($http) {
  return {
     getVeiculos: function(){
         var _url="http://www.itserv.com.br/ITServ/api/Veiculo";
@@ -51,7 +50,7 @@ angular.module('app.services', [])
             });
         }
  }
-})
+})*/
 
 .factory('verificaCorridaService', function($http) {
  return {
@@ -69,7 +68,7 @@ angular.module('app.services', [])
 
 .factory('criarCorridaService', function($http) {
       var _postCorrida = function(run){
-          return  $http.post(SERVICE_URL+"/run", run);
+          return  $http.post('http://104.236.110.237:3000/run', run);
       };
       return{
         postCorrida: _postCorrida
@@ -91,14 +90,14 @@ angular.module('app.services', [])
 
 .factory('buscarCorrida', function($http) {
  return {
-    getCorridas: function(inicio, termino, idCar, idUser,flag){
+    getCorridas: function(inicio, termino, idCar, idUser, flag){
       //console.log(inicio,termino,idCar);
       //http://localhost:3000/run?$gte="2016-06-21"&$lte="2016-06-22"
       if (flag==1) {
-        var _url= 'http://localhost:3000/run?$gte="'+inicio+'"&$lte="'+termino+'"&carro='+idCar+'"&flag='+flag+'';
+        var _url= 'http://104.236.110.237:3000/run?$gte="'+inicio+'"&$lte="'+termino+'"&carro='+idCar+'"&flag='+flag+'';
 
       }else {
-        var _url= 'http://localhost:3000/run?$gte="'+inicio+'"&$lte="'+termino+'&flag='+flag+'&usuario='+idUser+'';
+        var _url= 'http://104.236.110.237:3000/run?$gte="'+inicio+'"&$lte="'+termino+'&flag='+flag+'&usuario='+idUser+'';
       }
 
 
@@ -110,6 +109,7 @@ angular.module('app.services', [])
   }
  }
 })
+
 .service('BlankService', [function(){
 
 }]);

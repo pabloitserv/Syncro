@@ -7,8 +7,12 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('app', ['ionic', 'app.routes', 'app.services', 'app.directives', 'ngCordova'])
 
-.run(function($ionicPlatform) {
+.run(function($ionicPlatform, $ionicPopup, $timeout, $interval) {
   $ionicPlatform.ready(function() {
+    checkConnection();
+
+    
+
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
     if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
@@ -19,5 +23,24 @@ angular.module('app', ['ionic', 'app.routes', 'app.services', 'app.directives', 
       // org.apache.cordova.statusbar required
       StatusBar.styleDefault();
     }
+
+
+   function checkConnection(){
+      if(window.Connection){
+        if(navigator.connection.type == Connection.NONE){
+          var popupDesconcted = $ionicPopup.show({
+            title: 'Aviso <i class="icon ion-alert-circled assertive"></i>',
+            template: '<p class="text-center assertive"><strong>Sem conexão com internet!</strong>'
+          });
+          $timeout(function(){
+            popupDesconcted.close();
+          }, 5001)
+        }
+      }
+   };
+   $interval(function(){
+     checkConnection();
+   }, 5000);
+
   });
 })

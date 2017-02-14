@@ -2,31 +2,37 @@
   Tela de fechamento de corrida, recupera a imagem do painel, o valor do km e qual o carro esta sendo usado
  -->
 
-<ion-view style="" class=" " id="page4" title="Fechar corrida">
-    <ion-content class="has-header" padding="true" ng-controller="fecharCorridaCtrl">
-      <div class="card">
-        <div class="image item-image">
-                    <!--Retorna a imagem recureda pela camêra -->
-          <img ng-src="{{imageCamera}}" ng-model="imagem" />
-        </div>
+<ion-view style="" class="fundo" id="page4">
+  <ion-nav-bar class="bar-stable">
+      <ion-nav-back-button class="button-icon icon ion-ios-arrow-back">Back</ion-nav-back-button>
+  </ion-nav-bar>
+  <ion-header-bar class="bar-positive">
+    <h1 class="title">SYNCHRO - FECHAR CORRIDA</h1>
+  </ion-header-bar>
+    <ion-content class="has-header" padding="true" scroll="true" ng-controller="fecharCorridaCtrl">
+
+      <div class="image item-image">
+        <img ng-src="{{imageCamera}}" ng-model="imagem" />
       </div>
+
+      <div style="width: 283px; height: 15px;" class="spacer"></div>
+
+    <!-- Botão para se abrir a camêra -->
             <!-- Botão para se abrir a camêra -->
-        <button class=" button button-positive  button-block " id="novaCorrida-button5" ng-click="pegarFoto()">Tirar foto</button>
-        <form style="" class="list">
-            Km:
-            <label style="" class="item item-input">
-                          <!-- Recupera o valor do km inputado -->
-                <input  placeholder="Informar KM" type="number" ng-model="mileage"/>
-            </label>
+      <button class="button button-calm  button-block btn-entrar icon ion-android-camera status-run" id="novaCorrida-button5" ng-click="pegarFoto()"></button>
 
-            <div style="width: 283px; height: 30px;" class="spacer"></div>
+      <div class="list">
+        <label class="item-input item-floating-label">
+          <span class="input-label field-login">KM</span>
+          <input class="placeholder-login" placeholder="Digite o km do painel do carro"  type="number" ng-model="mileage">
+        </label>
+      </div>
+
+            <div style="width: 283px; height: 15px;" class="spacer"></div>
             <!-- Retorna o carro escolhido na tela de abertura  -->
-              <p>
-                <b class="text_align_and_color_alert">Carro: {{ placaModel }}</b>
-              </p>
+              <p style="color: #ccc; font-weight: bold; text-align: center;">Carro: {{ placaModel }}</p>
 
-              </form>
                 <!-- Cadastra, finaliza e adiciona a corrida -->
-              <button ng-click="finalizaCorrida()" class="button button-assertive button-block " id="abrirCorrida-button4" ng-disabled="load"><ion-spinner icon="lines" ng-show="load"></ion-spinner><span ng-hide="load">{{ fechar }}</span></button>
+              <button ng-click="finalizaCorrida()" class="button button-assertive button-block btn-entrar" id="abrirCorrida-button4" ng-disabled="load"><ion-spinner icon="lines" ng-show="load"></ion-spinner><span ng-hide="load">{{ fechar }}</span></button>
     </ion-content>
 </ion-view>

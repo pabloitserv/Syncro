@@ -2,28 +2,32 @@
   Tela de criação de senha
  -->
 
-<ion-view style="" id="page5" title="Login - Nova Senha">
+<ion-view style="" id="page5"  class="fundo">
+  <ion-nav-bar class="bar-stable">
+      <ion-nav-back-button class="button-icon icon ion-ios-arrow-back">Back</ion-nav-back-button>
+  </ion-nav-bar>
+  <ion-header-bar class="bar-positive">
+    <h1 class="title">SYNCHRO - NOVA SENHA</h1>
+  </ion-header-bar>
     <ion-content class="has-header" padding="true" ng-controller="criarSenhaCtrl">
       <div class="logo">
-        <img src="img/logo.png"  style="display: block; margin-left: auto; margin-right: auto;" />
+        <img src="img/logo.png"  class="logo" />
       </div>
+      <div style="width: 286px; height: 15px;" class="spacer"></div>
+      <ion-list style="">
         <form style="" class="list" ng-controller="criarSenhaCtrl">
 
 
-            <div style="width: 286px; height: 40px;" class="spacer"></div>
-            <ion-list style="">
-                <div>
-                  <p class="alerta">Por favor insira uma nova senha!</p>
-                </div>
-                <label style="" class="item item-input">
-                    <!-- Recebe a senha nova atraves do input -->
-                    <input placeholder="Nova Senha" type="text" ng-model="novaSenha" />
+                <label class="item-input item-floating-label">
+
+                  <span class="input-label field-login">Nova Senha</span>
+                  <input class="placeholder-login" placeholder="Digite sua nova senha"  type="number" ng-model="novaSenha">
                 </label>
-                <div style="height: 5px;" class="spacer"></div>
+                <div style="height: 15px" class="spacer"></div>
 
             </ion-list>
               <!-- cadastra uma nova senha  -->
-            <a ng-click="criar()" class="button button-positive  button-block" ng-disabled="!novaSenha">Criar Senha</a>
+            <a ng-click="criar()" class="button button-positive  button-block btn-entrar" ng-disabled="!novaSenha">Criar Senha</a>
         </form>
     </ion-content>
 </ion-view>

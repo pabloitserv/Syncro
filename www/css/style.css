@@ -1,10 +1,78 @@
 /* Empty. Add your own CSS if you like */
+.text-format{
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+.fundo{
+  background-color: #666;
+}
+.logo{
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 200px;
+  max-height: 68px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.placeholder-login {
+  font-weight: bold;
+  text-transform: uppercase;
+}
+.input-label{
+    color: #fff;
+}
+.placeholder-login::-webkit-input-placeholder {
+  color: #fff;
+}
+.placeholder-login:-moz-placeholder {
+  color:#fff;
+}
+.placeholder-login::-moz-placeholder {
+  color: #fff;
+}
+.placeholder-login:-ms-input-placeholder {
+  color: #fff;
+}
+input[placeholder] {
+  color: #000;
+  border-bottom: 4px outset #999;
+}
+.field-login {
+  color: #fff;
+  font-weight: bold;
+}
+/*======================================================*/
+.btn-entrar{
+  text-transform: uppercase;
+  font-weight: 600;
+  border-radius: 20px;
+  color: #fff;
+}
+/*button button-calm button-block*/
+/*======================================================*/
 
+.status-run{
+  box-shadow: 5px 5px 5px #333;
+}
+.status-run-color{
+  background-color: #888;
+}
+/*==========================================================*/
+
+.select-config{
+  padding: 10px;
+  background-color: #444;
+  border: none;
+  width: 100%;
+  color: #fff;
+  font-weight: bolder;
+}
 .alerta{
-  color: rgb(255, 0, 0);
+  color: rgb(0, 224, 255);
   text-align: center;
 }
-
 .text-color{
   color: #00d63c;
   background-color: rgba(109, 233, 89, 0.2);

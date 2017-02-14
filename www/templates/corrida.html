@@ -2,17 +2,27 @@
   Pode ser considerada uma tela de status com relação a corrida, resumindo se o botão for verde precisa ser aberta se vermelho precisa ser fechada.
 -->
 
-<ion-view style="" class=" " id="page2" title="Corrida">
+<ion-view style="" class="fundo" id="page2">
+
+  <ion-header-bar class="bar-positive">
+    <h1 class="title">SYNCHRO - CORRIDA</h1>
+  </ion-header-bar>
   <ion-content class="has-header" padding="true" ng-controller="corridaCtrl">
     <!-- Um indentificador que traz da tela de login qual ou quem é o usuário, mostrando seu nome -->
-      <div class="item item-divider">Usuario: <b>{{instalador}}</b>
-      </div>
+
+        <div class="status-run">
+          <div class="list card">
+            <div class="item status-run-color">
+              <p style="color:#fff; font-weight: 600;" class="text-format">Usuário: <b>{{instalador}}</b> </p>
+            </div>
+          </div>
+        </div>
 
       <!-- Botão para iniciar uma nova corrida -->
-        <a class="button button-balanced  button-block " id="corrida-button11" ng-disabled="on" ng-show="onExibi" ng-click="novaCorrida()">Nova corrida</a>
+        <a class="button button-balanced  button-block status-run btn-entrar" id="corrida-button11" ng-disabled="on" ng-show="onExibi" ng-click="novaCorrida()">Nova corrida</a>
 
         <!-- Botão para finalizar uma corrida aberta -->
-        <a class=" button button-assertive  button-block " id="corrida-button4" ng-disabled="off" ng-show="offExibi"  ng-click="fecharCorrida()">Fechar corrida</a>
+        <a class=" button button-assertive  button-block status-run btn-entrar" id="corrida-button4" ng-disabled="off" ng-show="offExibi"  ng-click="fecharCorrida()">Fechar corrida</a>
 
         <div class="card" ng-show="offExibi">
           <!-- Mensagem que mostra uma corrida iniciada apenas com um texto -->
@@ -20,15 +30,6 @@
             <strong>{{message1}}</strong>
           </div>
         </div>
-
-          <div style="height: 10px;" class="spacer"></div>
-
-          <div class="card" ng-show="offExibi">
-            <!-- Uma mensagem de alerta para o usuario que existe uma corrida aberta e deve ser fecheda -->
-            <div class="item item-text-wrap text-color-2 text_center">
-              <strong>{{message2}}</strong>
-            </div>
-          </div>
 
 </ion-content>
 </ion-view>
