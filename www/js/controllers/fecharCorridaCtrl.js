@@ -94,7 +94,8 @@ angular.module('app')
                 alert("MSG004 - CORRIDA FINALIZADA COM SUCESSO!");
                 $scope.load = false;
                 $scope.fechar = "Finalizada";
-                $ionic.Platform.exitApp();
+              
+                ionic.Platform.exitApp();
 
             }).error(function(data, status) {
                 alert("MSG003 - FALHA AO FINALIZAR");

@@ -3,8 +3,11 @@ angular.module('app')
 //Faz o controle da captura de imagem e cadastra a corrida no banco
 
 
-.controller('novaCorridaCtrl', function($scope, $cordovaCamera, $cordovaGeolocation, dateFilter, Scopes, criarCorridaService, $location, $window) {
+.controller('novaCorridaCtrl', function($scope, $cordovaCamera, $cordovaGeolocation, Scopes, criarCorridaService, buscarCorrida, $filter) {
 
+  function salvaPlaca(run){
+    window.localStorage.setItem("PLACA1", run.vehicle);
+  }
 
 
   $scope.lista = [
@@ -166,8 +169,10 @@ angular.module('app')
         latitude: $scope.latitude,
         longitude:$scope.longitude
       }
+
       // console.log(run);
           //console.log($scope.car.IdVeiculo + ($scope.car.Placa + $scope.car.Modelo));
+
 
         criarCorridaService.postCorrida(run).success(function(data){
             alert("MSG002 - CORRIDA INICIADA COM SUCESSO!");
@@ -175,7 +180,8 @@ angular.module('app')
             $scope.iniciar = "Iniciada";
             ionic.Platform.exitApp();
         }).error(function(data, status){
-          //console.log(run);
+            console.log(run.vehicle);
+            salvaPlaca(run);
             alert("MSG003 - FALHA AO INICIAR!");
             $scope.load = false;
             $scope.iniciar = "Iniciar";

@@ -2,11 +2,7 @@ angular.module('app')
 
 // Controla o status da corrida
 
-.controller('corridaCtrl', function($scope, Scopes, $ionicHistory, $location, buscarCorrida, $filter) {
-  $ionicHistory.nextViewOptions({
-    disableAnimate: true,
-    disableBack: true
-  });
+.controller('corridaCtrl', function($scope, Scopes, buscarCorrida, $filter, $state) {
 
 
     var token = Scopes.get('loginCtrl').token;
@@ -52,11 +48,10 @@ angular.module('app')
         }
     });
     $scope.novaCorrida = function() {
-        $location.path('/page3');
-
+      $state.go('novaCorrida');
     };
     $scope.fecharCorrida = function() {
-        $location.path('/page4');
+      $state.go('fecharCorrida');
     };
 
 })
