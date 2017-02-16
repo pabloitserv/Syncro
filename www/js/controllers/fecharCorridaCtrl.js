@@ -62,8 +62,8 @@ angular.module('app')
 
 
         // Acha a placa e registra
-        var i;
-        for (i = 0; i < corridas.data.length; i++) {
+
+        for (var i = 0; i < corridas.data.length; i++) {
 
             $scope.placaModel = corridas.data[i].vehicle;
 
@@ -94,7 +94,7 @@ angular.module('app')
                 alert("MSG004 - CORRIDA FINALIZADA COM SUCESSO!");
                 $scope.load = false;
                 $scope.fechar = "Finalizada";
-              
+
                 ionic.Platform.exitApp();
 
             }).error(function(data, status) {

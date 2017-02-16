@@ -1,13 +1,6 @@
 angular.module('app')
-
 //Faz o controle da captura de imagem e cadastra a corrida no banco
-
-
-.controller('novaCorridaCtrl', function($scope, $cordovaCamera, $cordovaGeolocation, Scopes, criarCorridaService, buscarCorrida, $filter) {
-
-  function salvaPlaca(run){
-    window.localStorage.setItem("PLACA1", run.vehicle);
-  }
+.controller('novaCorridaCtrl', function($scope, $cordovaCamera,  $cordovaGeolocation, Scopes, criarCorridaService, $window) {
 
 
   $scope.lista = [
@@ -148,20 +141,32 @@ angular.module('app')
            }
         );
 
+    $scope.car = [];
+    $scope.selected = JSON.parse(localStorage.getItem("CAR"));
+
+
+    // if($scope.selected.length == 0){
+    //   $scope.p = false;
+    // }else{
+    //   $scope.p = true;
+    // }
+
 
     $scope.addCorrida = function(){
-
       $scope.load = true;
       $scope.iniciar = "";
-
+      if($scope.car.length == 0){
+        $scope.car.ID_VEICULO = $scope.selected.ID_VEICULO;
+        $scope.car.PLACA = $scope.selected.PLACA;
+        $scope.car.MODELO = $scope.selected.MODELO;
+      }
       var deviceStartDate = new Date();
-
       var user = Scopes.get('loginCtrl').user;
       var run = {
         deviceStartDate: deviceStartDate,
         mileage: $scope.mileage,
         car: $scope.car.ID_VEICULO,
-        vehicle: $scope.car.PLACA +" - "+ $scope.car.MODELO,
+        vehicle: $scope.car.PLACA + " - " + $scope.car.MODELO,
         user: user,
         city: user.city,
         open:true,
@@ -169,26 +174,21 @@ angular.module('app')
         latitude: $scope.latitude,
         longitude:$scope.longitude
       }
-
-      // console.log(run);
+      // var myJson = run.vehicle;
+      // localStorage.setItem("RUN", JSON.stringify(myJson));
+        localStorage.setItem("CAR", JSON.stringify($scope.car));
           //console.log($scope.car.IdVeiculo + ($scope.car.Placa + $scope.car.Modelo));
-
-
         criarCorridaService.postCorrida(run).success(function(data){
+
             alert("MSG002 - CORRIDA INICIADA COM SUCESSO!");
             $scope.load = false;
             $scope.iniciar = "Iniciada";
             ionic.Platform.exitApp();
         }).error(function(data, status){
-            console.log(run.vehicle);
-            salvaPlaca(run);
+
             alert("MSG003 - FALHA AO INICIAR!");
             $scope.load = false;
             $scope.iniciar = "Iniciar";
-
         });
-
-
-  };
-
+      };
 });

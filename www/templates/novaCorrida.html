@@ -10,9 +10,6 @@
   </ion-header-bar>
     <ion-content class="has-header" padding="true" scroll="true" ng-controller="novaCorridaCtrl">
         <!--Retorna a imagem recureda pela camêra -->
-
-        <div style="width: 283px; height: 15px;" class="spacer"></div>
-
         <div class="image item-image">
             <!--Retorna a imagem recuperada pela camêra -->
             <img ng-src="{{imageCamera}}" ng-model="imagem" class="status-run" />
@@ -30,11 +27,14 @@
           </label>
         </div>
         <div class="list">
-
+            <div ng-if="selected">
+              <p class="text-center"><b>{{selected.PLACA +" - "+ selected.MODELO}}</b></p>
+              <p class="text-center stable"><b>Sua última seleção de veículo, se for manter toque em iniciar, se não escolha outro veículo.</b></p>
+            </div>
             <label>
           <p style="color: #ccc; font-weight: bold; text-align: center;">Seleciona o veículo:</p>
         <!-- Uma combo box com todos os modelos de carros com placas e modelos -->
-          <select class="select-config status-run" ng-model="car" ng-options="veiculo.PLACA+' - '+veiculo.MODELO for veiculo in lista">
+          <select class="select-config status-run" ng-model="car" ng-options="veiculo.PLACA+' - '+veiculo.MODELO for veiculo in lista" id="comboBox">
             <option value="">Placa - Modelo</option>
           </select>
        </label>
