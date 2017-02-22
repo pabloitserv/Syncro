@@ -1,7 +1,6 @@
 angular.module('app')
 //Faz o controle da captura de imagem e cadastra a corrida no banco
-.controller('novaCorridaCtrl', function($scope, $cordovaCamera,  $cordovaGeolocation, Scopes, criarCorridaService, $window) {
-
+.controller('novaCorridaCtrl', function($scope, $ionicPopup, $cordovaCamera, $cordovaGeolocation, Scopes, criarCorridaService, $window) {
 
   $scope.lista = [
     {"ID_VEICULO":99,"PLACA":"EAF-3917","MODELO":"FIAT UNO MILLE 1.0"},
@@ -143,23 +142,20 @@ angular.module('app')
 
     $scope.car = [];
     $scope.selected = JSON.parse(localStorage.getItem("CAR"));
-
-
-    // if($scope.selected.length == 0){
-    //   $scope.p = false;
-    // }else{
-    //   $scope.p = true;
-    // }
-
+    if($scope.selected){
+      $scope.visivel = true;
+      $scope.car.ID_VEICULO = $scope.selected.ID_VEICULO;
+      $scope.car.PLACA = $scope.selected.PLACA;
+      $scope.car.MODELO = $scope.selected.MODELO;
+    }else{
+      $scope.visivel = false;
+    }
 
     $scope.addCorrida = function(){
+
       $scope.load = true;
       $scope.iniciar = "";
-      if($scope.car.length == 0){
-        $scope.car.ID_VEICULO = $scope.selected.ID_VEICULO;
-        $scope.car.PLACA = $scope.selected.PLACA;
-        $scope.car.MODELO = $scope.selected.MODELO;
-      }
+
       var deviceStartDate = new Date();
       var user = Scopes.get('loginCtrl').user;
       var run = {
@@ -174,19 +170,32 @@ angular.module('app')
         latitude: $scope.latitude,
         longitude:$scope.longitude
       }
-      // var myJson = run.vehicle;
-      // localStorage.setItem("RUN", JSON.stringify(myJson));
-        localStorage.setItem("CAR", JSON.stringify($scope.car));
-          //console.log($scope.car.IdVeiculo + ($scope.car.Placa + $scope.car.Modelo));
+
+      localStorage.setItem("CAR", JSON.stringify({
+        ID_VEICULO: $scope.car.ID_VEICULO,
+        PLACA: $scope.car.PLACA,
+        MODELO: $scope.car.MODELO
+      }));
+
+
         criarCorridaService.postCorrida(run).success(function(data){
+            localStorage.setItem("STATUS-CORRIDA", JSON.stringify(run.open));
 
-            alert("MSG002 - CORRIDA INICIADA COM SUCESSO!");
-            $scope.load = false;
+            $scope.load = true;
             $scope.iniciar = "Iniciada";
-            ionic.Platform.exitApp();
+            var pop = $ionicPopup.show({
+              title: "MS002",
+              template: "<p class='text-center'>CORRIDA INICIADA COM SUCESSO!</p>"
+            });
+            setTimeout(function(){
+              pop.close();
+              ionic.Platform.exitApp();
+            }, 3500);
         }).error(function(data, status){
-
-            alert("MSG003 - FALHA AO INICIAR!");
+          $ionicPopup.alert({
+            title: "MS003",
+            template: "<p class='text-center'>FALHA AO INICIAR CORRIDA!</p>"
+          });
             $scope.load = false;
             $scope.iniciar = "Iniciar";
         });

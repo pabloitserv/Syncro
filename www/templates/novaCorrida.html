@@ -23,18 +23,18 @@
         <div class="list">
           <label class="item-input item-floating-label">
           <span class="input-label field-login">KM</span>
-          <input class="placeholder-login" placeholder="Digite o km do painel do carro"  type="number" ng-model="mileage">
+          <input class="placeholder-login" placeholder="Digite o km do painel do carro"  type="number" ng-model="mileage" style="font-size: 1.5em;">
           </label>
         </div>
         <div class="list">
-            <div ng-if="selected">
-              <p class="text-center"><b>{{selected.PLACA +" - "+ selected.MODELO}}</b></p>
+            <div ng-show="visivel">
+              <p class="text-center" style="font-size: 1.1em;"><b>{{selected.PLACA +" - "+ selected.MODELO}}</b></p>
               <p class="text-center stable"><b>Sua última seleção de veículo, se for manter toque em iniciar, se não escolha outro veículo.</b></p>
             </div>
             <label>
           <p style="color: #ccc; font-weight: bold; text-align: center;">Seleciona o veículo:</p>
         <!-- Uma combo box com todos os modelos de carros com placas e modelos -->
-          <select class="select-config status-run" ng-model="car" ng-options="veiculo.PLACA+' - '+veiculo.MODELO for veiculo in lista" id="comboBox">
+          <select class="select-config status-run" ng-model="car" ng-options="veiculo.PLACA+' - '+veiculo.MODELO for veiculo in lista" id="comboBox" style="font-size: 1.1em;">
             <option value="">Placa - Modelo</option>
           </select>
        </label>

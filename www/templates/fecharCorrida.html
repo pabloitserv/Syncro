@@ -24,13 +24,13 @@
       <div class="list">
         <label class="item-input item-floating-label">
           <span class="input-label field-login">KM</span>
-          <input class="placeholder-login" placeholder="Digite o km do painel do carro"  type="number" ng-model="mileage">
+          <input class="placeholder-login" placeholder="Digite o km do painel do carro"  type="number" ng-model="mileage" style="font-size: 1.5em;">
         </label>
       </div>
 
             <div style="width: 283px; height: 15px;" class="spacer"></div>
             <!-- Retorna o carro escolhido na tela de abertura  -->
-              <p style="color: #ccc; font-weight: bold; text-align: center;">Carro: {{ placaModel }}</p>
+              <p style="color: #ccc; font-weight: bold; text-align: center; font-size: 1.1em;">Carro: {{ selected.PLACA + " - " + selected.MODELO }}</p>
 
                 <!-- Cadastra, finaliza e adiciona a corrida -->
               <button ng-click="finalizaCorrida()" class="button button-assertive button-block btn-entrar" id="abrirCorrida-button4" ng-disabled="load"><ion-spinner icon="lines" ng-show="load"></ion-spinner><span ng-hide="load">{{ fechar }}</span></button>

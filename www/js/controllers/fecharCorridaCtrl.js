@@ -2,23 +2,10 @@ angular.module('app')
 
 // Controla o fechamento da corrida, pega a imagem e o input e cadastra no banco
 
-.controller('fecharCorridaCtrl', function($scope, $http, $window, $cordovaCamera, $cordovaGeolocation, $interval, dateFilter, Scopes, criarCorridaService, $location, $filter, buscarCorrida) {
+.controller('fecharCorridaCtrl', function($scope, $ionicPopup, $http, $window, $cordovaCamera, $cordovaGeolocation, $interval, dateFilter, Scopes, criarCorridaService, $location, $filter, buscarCorrida) {
 
     $scope.load = false;
     $scope.fechar = "Fechar";
-
-    var dataAtraso = new Date();
-    var inicio = new Date(dataAtraso.setDate(dataAtraso.getDate() - 1));
-    var dia = 1;
-    var dataAtual = new Date();
-    var termino = new Date(dataAtual.setDate(dataAtual.getDate() + 1));
-    inicio = $filter('date')(inicio, 'yyyy-MM-dd');
-    termino = $filter('date')(termino, 'yyyy-MM-dd');
-    var usuario = Scopes.get('loginCtrl').user;
-    buscarCorrida.getCorridas(inicio, termino, 0, usuario._id, 0).then(function(corridas) {
-
-        var posicao = corridas.data.length;
-        $scope.carro = corridas.data[posicao - 1].car;
 
         $scope.pegarFoto = function() {
 
@@ -60,15 +47,8 @@ angular.module('app')
            }
         );
 
-
-        // Acha a placa e registra
-
-        for (var i = 0; i < corridas.data.length; i++) {
-
-            $scope.placaModel = corridas.data[i].vehicle;
-
-        }
-
+        $scope.selected = JSON.parse(localStorage.getItem("CAR"));
+        console.log($scope.selected);
         $scope.finalizaCorrida = function() {
             $scope.load = true;
             $scope.fechar = "";
@@ -79,8 +59,8 @@ angular.module('app')
             var run = {
                 deviceStartDate: deviceStartDate,
                 mileage: $scope.mileage,
-                car: $scope.carro,
-                vehicle: $scope.placaModel,
+                car: $scope.selected.ID_VEICULO,
+                vehicle: $scope.selected.PLACA+" - "+$scope.selected.MODELO,
                 user: user,
                 city: user.city,
                 open: false,
@@ -88,22 +68,33 @@ angular.module('app')
                 latitude: $scope.latitude,
                 longitude: $scope.longitude
             }
-            //console.log(run);
 
             criarCorridaService.postCorrida(run).success(function(data) {
-                alert("MSG004 - CORRIDA FINALIZADA COM SUCESSO!");
+              localStorage.setItem("STATUS-CORRIDA", JSON.stringify(run.open));
+
+              var popF = $ionicPopup.show({
+                title: "MSG004",
+                template: "<p class='text-center'>CORRIDA FINALIZADA COM SUCESSO!</p>"
+              });
                 $scope.load = false;
                 $scope.fechar = "Finalizada";
 
-                ionic.Platform.exitApp();
+                setTimeout(function(){
+                  popF.close();
+                  ionic.Platform.exitApp();
+                }, 3500);
 
             }).error(function(data, status) {
-                alert("MSG003 - FALHA AO FINALIZAR");
+                $ionicPopup.alert({
+                  title: "MSG003",
+                  template: "<p class='text-center'>FALHA AO FINALIZAR</p>"
+                });
+
                 $scope.load = false;
                 $scope.fechar = "finalizar";
             });
 
         };
 
-    });
+    // });
 });
