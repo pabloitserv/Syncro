@@ -48,7 +48,6 @@ angular.module('app')
         );
 
         $scope.selected = JSON.parse(localStorage.getItem("CAR"));
-        console.log($scope.selected);
         $scope.finalizaCorrida = function() {
             $scope.load = true;
             $scope.fechar = "";
@@ -72,24 +71,21 @@ angular.module('app')
             criarCorridaService.postCorrida(run).success(function(data) {
               localStorage.setItem("STATUS-CORRIDA", JSON.stringify(run.open));
 
+              $scope.load = true;
+              $scope.fechar = "Finalizada";
               var popF = $ionicPopup.show({
                 title: "MSG004",
                 template: "<p class='text-center'>CORRIDA FINALIZADA COM SUCESSO!</p>"
               });
-                $scope.load = false;
-                $scope.fechar = "Finalizada";
-
                 setTimeout(function(){
                   popF.close();
                   ionic.Platform.exitApp();
                 }, 3500);
-
             }).error(function(data, status) {
                 $ionicPopup.alert({
                   title: "MSG003",
                   template: "<p class='text-center'>FALHA AO FINALIZAR</p>"
                 });
-
                 $scope.load = false;
                 $scope.fechar = "finalizar";
             });

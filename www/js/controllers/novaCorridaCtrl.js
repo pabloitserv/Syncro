@@ -116,10 +116,10 @@ angular.module('app')
   };
 
   $cordovaCamera.getPicture(options).then(function(imageData) {
-    console.log("sucesso" + angular.toJson(imageData));
     $scope.imageCamera = "data:image/jpeg;base64," + imageData;//Função trata a imagem, convertendo de binário para jpeg, renderizando na tela
   }, function(err) {
     // error
+    getPicture(options);
     alert("err: "+err);
     error(err);
   });

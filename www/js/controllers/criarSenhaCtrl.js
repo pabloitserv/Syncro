@@ -1,6 +1,6 @@
 angular.module('app')
 
-.controller('criarSenhaCtrl', function($scope, userServicePass,userServiceLogin,Scopes,$location,$window){
+.controller('criarSenhaCtrl', function($scope, userServicePass,Scopes, $ionicPopup, $state){
 
 //Controla a criação de senha
   $scope.criar = function(){
@@ -10,8 +10,14 @@ angular.module('app')
     var _password = $scope.novaSenha;
 
     userServicePass.putPassword(_id, _password).then(function(){
-       alert('MSG005 - SENHA CRIADA COM SUCESSO!');
-      $location.path('/page1');
+       var pop = $ionicPopup.show({
+         title:"MSG005",
+         template:"SENHA CRIADA COM SUCESSO!"
+       });
+       setTimeout(function(){
+         pop.close();
+         $state.go('login');
+       }, 2500);
     });
 
   };

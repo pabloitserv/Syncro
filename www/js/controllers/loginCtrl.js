@@ -1,6 +1,6 @@
 angular.module('app')
 
-.controller('loginCtrl', function($scope, $location, $window, userServiceToken, userServiceLogin, Scopes, buscarCorrida) {
+.controller('loginCtrl', function($scope, userServiceToken, userServiceLogin, Scopes, $state, $ionicPopup) {
 
 //Adiciona um token ao usuário
 $scope.usuario = '';
@@ -35,17 +35,33 @@ $scope.senha = '';
 
                     if (parametros.cpf == user.value.cpf && parametros.password == null) {
                           if (user.value.password == null) {
-                            alert("MSG001 - ESTE USUÁRIO NÃO TEM SENHA DEFINIDA!\n\nPRESSIONE OK PARA CONTINUAR");
-                            $location.path('/page5');
+                            var pop = $ionicPopup.show({
+                              title: "MSG-001",
+                              template: "<p class='text-center'>ESTE USUÁRIO NÃO TEM SENHA DEFINIDA!\n\nPRESSIONE OK PARA CONTINUAR</p>"
+                            });
+                            setTimeout(function(){
+                              pop.close();
+                              $state.go('criarSenha');
+                            }, 2500);
                           }
                     }
                     else if (parametros.cpf == user.value.cpf && parametros.password == user.value.password) {
-                       $location.path('/page2');
+                       $state.go('corrida');
                     }
 
-              }).error(function(user, status){});
-          }).error(function(chave, status){});
+              }).error(function(user, status){
+                var erroShow = $ionicPopup.alert({
+                  title: "Error !",
+                  template: "User - "+user+", Status - "+status
+                });
+              });
+          }).error(function(chave, status){
+            var erroShow = $ionicPopup.alert({
+              title: "Error !",
+              template: "User - "+chave+", Status - "+status
+            });
+          });
 
-        
+
   };
 });

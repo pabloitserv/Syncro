@@ -1,13 +1,13 @@
 <!--
   Tela de abertura de corrida, recupera a imagem do painel, o valor do km e qual o carro esta sendo usado
  -->
-<ion-view style="" class="fundo" id="page3">
-  <ion-nav-bar class="bar-stable">
-      <ion-nav-back-button class="button-icon icon ion-ios-arrow-back">Back</ion-nav-back-button>
+<ion-view style="" class="fundo text-center" title="NOVA CORRIDA" id="page3">
+  <ion-nav-bar class="bar-positive">
+    <ion-nav-back-button class="button-icon icon ion-ios-arrow-back">Back</ion-nav-back-button>
   </ion-nav-bar>
-  <ion-header-bar class="bar-positive">
-    <h1 class="title">SYNCHRO - NOVA CORRIDA</h1>
-  </ion-header-bar>
+  <!-- <ion-header-bar class="bar-positive">
+    <h1 class="title text-center">NOVA CORRIDA</h1>
+  </ion-header-bar> -->
     <ion-content class="has-header" padding="true" scroll="true" ng-controller="novaCorridaCtrl">
         <!--Retorna a imagem recureda pela camêra -->
         <div class="image item-image">
@@ -23,7 +23,7 @@
         <div class="list">
           <label class="item-input item-floating-label">
           <span class="input-label field-login">KM</span>
-          <input class="placeholder-login" placeholder="Digite o km do painel do carro"  type="number" ng-model="mileage" style="font-size: 1.5em;">
+          <input class="placeholder-login" placeholder="Digite o km"  type="number" ng-model="mileage" style="font-size: 1.5em;">
           </label>
         </div>
         <div class="list">
@@ -43,8 +43,8 @@
         <div style="width: 283px; height: 5px;" class="spacer"></div>
 
         <button ng-click="addCorrida()" class="button button-balanced button-block btn-entrar status-run" id="abrirCorrida-button4" ng-disabled="load">
-        <ion-spinner icon="lines" ng-show="load"></ion-spinner>
-        <span ng-hide="load">{{ iniciar }}</span>
-      </button>
+          <ion-spinner icon="lines" ng-show="load"></ion-spinner>
+          <span ng-hide="load">{{ iniciar }}</span>
+        </button>
     </ion-content>
 </ion-view>
